@@ -1,0 +1,37 @@
+Prequisites:
+Git installed
+URL for TFS
+Access for TFS 
+Gitlab Access
+Gitlab URL
+
+1. Installation of portable git-tfs software on VDI
+--> URL: https://github.com/git-tfs/git-tfs/releases/download/v0.24.2/GitTfs-0.24.2.zip
+--> unzip the zip file in downloads folder
+--> go inside the folder GitTfs-0.24.2
+--> open powershell 
+--> # To add a directory to the user's PATH variable for the current session
+$env:PATH += ";\\ULVMCTMFIL204\Desktop204B$\SEDLABADKAR\Downloads\GitTfs-0.24.2"
+--> Now you can use Git-TFS
+
+Migration of TFS to Gitlab 
+1. Listing All branches from the TFS server
+--> git-tfs list-remote-branches http://navmctmtfs001:8080/tfs 
+
+2. Branchwise cloning of each project
+--> git tfs clone http://navmctmtfs001:8080/tfs/ "$/WebNMTS/Development/FeatureBranch1" C:\New
+
+3. Navigate to Directory New
+
+4. check the logs 
+--> git log
+
+5. If the main branch has su branches then fetch all the sub branches:
+--> git tfs branch --init --all
+
+Note: master branch is the main branch from where we clone the code.
+
+6. Push all the code to gitlab 
+--> git push --all <url>
+
+http://navmctmtfs001:8080/tfs/
