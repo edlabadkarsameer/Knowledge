@@ -1,0 +1,51 @@
+$repos = @(
+	"$/WebServices/NumberSearchREST/Development/CExpansion_IEEDB_InHosting2/Source-branch",
+	"$/WebServices/NumberSearchREST/Development/EDB-DS/Source",
+	"$/WebServices/wsNumberHosting/Development/CExpansion_JuneNHR6_IEEDB_CExpansionPhase2_NHFR_Hosting/Source",
+	"$/WebServices/wsNumberHosting/Development/CExpansion_JuneNHR6_IEEDB_CExpansionPhase2_NHFR_Hosting_MSR8/Source",
+	"$/WebServices/wsNumberHosting/Development/CExpansionPhase2_NHFR_Hosting_MSR8_NHR9_NHR10_NHR11_NHR12_CHEDB/Source",
+	"$/WebServices/wsNumberHosting/Development/CExpansionPhase2_NHFR_Hosting_MSR8_NHR9_NHR10_NHR11_NHR12_NHR14/Source",
+	"$/WebServices/wsNumberHosting/Development/CExpansionPhase2_NHFR_Hosting_MSR8_NHR9_NHR10_NHR11_NHR12_NHR14_NHR15/Source",
+	"$/WebServices/wsNumberHosting/Development/Efficient Number Management/Source",
+	"$/WebServices/wsNumberHosting/Development/FeatureBranch1/Source",
+	"$/WebServices/wsNumberHosting/Development/IEEDB_CExpansionPhase2_NHFR_Hosting_MSR8_NHR9_NHR10/Source",
+	"$/WebServices/wsNumberHosting/Development/IEEDB_CExpansionPhase2_NHFR_Hosting_MSR8_NHR9_NHR10_NHR11/Source",
+	"$/WebServices/wsNumberHosting/Development/IEEDB_CExpansionPhase2_NHFR_Hosting_MSR8_NHR9_NHR10_NHR11_NHR12/Source",
+	"$/WebServices/wsNumberHosting/Development/IEEDB_CExpansionPhase2_NHFR_Hosting_MSR8_NHR9_NHR10_NHR11_NHR12_NHR13/Source",
+	"$/WebServices/wsNumberHosting/Development/JuneNHR6_IEEDB_CExpansionPhase2_NHFR_Hosting_MSR8_NHR9/Source",
+	"$/WebServices/wsNumberHosting/Development/NHGetWell-Sprint1/Source",
+	"$/WebServices/wsNumberHosting/Development/NHGetWell-Sprint2/Source",
+	"$/WebServices/wsNumberHosting/Development/NHGetWell-Sprint4-Release1/Source",
+	"$/WebServices/wsNumberHosting/Development/WSNumberHosting-ResaleFixes/Source",
+	"$/WebServices/wsNumberHosting/Development/WSNumberHosting-IT_PT_EDB/Source",
+	"$/WebServices/wsNumberHosting/Development/WSNumberHosting_All_NH_Nov_UKEDB_CExpansion/Source",
+	"$/WebServices/wsNumberHosting/Development/WSNumberHosting_All_NH_UKEDB_CExpansion_JuneNHR6/Source",
+	"$/WebServices/wsNumberHosting/Development/WSNumberHosting_All_NH_UKEDB_CExpansion_JuneNHR6_IEEDB/Source",
+	"$/WebServices/wsNumberHosting/Development/WSNumberHosting_CExpansion_JuneNHR6_IEEDB_CExpansionPhase2/Source",
+	"$/WebServices/wsNumberHosting/Development/WSNumberHosting-FTTH-ES-RE/Source",
+	"$/WebServices/wsNumberHosting/Development/WSNumberHosting-FINITE/Source",
+	"$/WebServices/wsNumberHosting/Development/WSNumberHosting-ES_Regulatory_All_NH_Nov_ITBacklog/Source",
+	"$/WebServices/wsNumberHosting/Development/WSNumberHosting_Microsoft_1b/Source",
+	"$/WebServices/wsNumberHosting/Development/WSNumberHosting-BE-EDB-DS/Source",
+	"$/WebServices/wsNumberHosting/Development/WSNumberHosting-EDB-DS/Source",
+	"$/WebServices/wsNumberHosting/Development/WSNumberHosting-ES_Regulatory/Source",
+	"$/WebServices/wsNumberHosting/Development/WSNumberHosting-ES_Regulatory_All_NH/Source",
+	"$/WebServices/wsNumberHosting/Development/WSNumberHosting-ES_Regulatory_All_NH_Nov/Source",
+	"$/WebServices/wsNumberHosting/Development/WSNumberHosting-ES_Regulatory_All_NH_Nov_UKEDB/Source"
+)
+$repos = @(
+    "$/WebServices/NumberSearchREST/Development/CExpansion_IEEDB_InHosting2/Source-branch",
+    "$/WebServices/NumberSearchREST/Development/EDB-DS/Source",
+)
+
+$tfsUrl = "http://navmctmtfs001:8080/tfs/"
+$destinationBase = "C:\New"
+$gitlabURL = "https://amsgit01/testing/nmts/webservices/wsnumberhosting.git"
+foreach ($repo in $repos) {
+    $branchName = ($repo -split '/')[(-2)]
+    $destination = Join-Path $destinationBase $branchName
+    git-tfs clone $tfsUrl $repo $destination
+    Set-Location $destination
+    git checkout -b $branchName master
+    git push $gitlabURL $branchName
+}
